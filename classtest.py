@@ -15,7 +15,8 @@ class RateMyProfScraper:
             i = 1
             while (i <= num_of_pages):# the loop insert all professor into list
                 page = requests.get("http://www.ratemyprofessors.com/filter/professor/?&page=" + str(
-                    i) + "&filter=teacherlastname_sort_s+asc&query=*%3A*&queryoption=TEACHER&queryBy=schoolId&sid=1205")
+                    i) + "&filter=teacherlastname_sort_s+asc&query=*%3A*&queryoption=TEACHER&queryBy=schoolId&sid=" + str(
+                    self.UniversityId))
                 temp_jsonpage = json.loads(page.content)
                 temp_list = temp_jsonpage['professors']
                 tempprofessorlist.extend(temp_list)
@@ -58,5 +59,9 @@ class RateMyProfScraper:
 
 
 WilliamPatersonUniversity = RateMyProfScraper(1205)
-WilliamPatersonUniversity.SearchProfessor("Scott McDonough")
+WilliamPatersonUniversity.SearchProfessor("Cyril Ku")
 WilliamPatersonUniversity.PrintProfessorDetail("overall_rating")
+
+MassInstTech = RateMyProfScraper(580)
+MassInstTech.SearchProfessor("Robert Berwick")
+MassInstTech.PrintProfessorDetail("overall_rating")
